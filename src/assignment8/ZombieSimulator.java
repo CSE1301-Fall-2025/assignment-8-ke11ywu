@@ -53,7 +53,7 @@ public class ZombieSimulator {
 			}
 			double xPos = in.nextDouble();
 			double yPos = in.nextDouble();
-			if (isZombie = true){
+			if (isZombie == true){
 				newEnt = new Zombie(xPos, yPos);
 			} else {
 				newEnt = new Nonzombie(xPos, yPos);
@@ -92,7 +92,7 @@ public class ZombieSimulator {
 		for (Entity entity : getEntities()) {
 			entity.draw();
 			StdDraw.setPenColor(0, 0, 0);
-			StdDraw.text(0.92, 0.92, this.getNonzombieCount() + "/" + this.entities.length);
+			StdDraw.text(0.92, 0.92, this.getZombieCount() + "/" + this.entities.length);
 		}
 
 		StdDraw.show(); // commit deferred drawing as a result of enabling double buffering

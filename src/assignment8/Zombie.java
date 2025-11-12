@@ -5,7 +5,7 @@ import support.cse131.NotYetImplementedException;
 
 public class Zombie extends Entity {
 
-	public static final double ZOMBIE_SPEED = 0.011;
+	public static final double ZOMBIE_SPEED = 0.051;
 
 	/**
 	 * Create a new Zombie object
@@ -33,7 +33,7 @@ public class Zombie extends Entity {
 	 */
 	public void draw() {
 		StdDraw.setPenColor(0, 90, 0);
-		StdDraw.point(this.getX(), this.getY());
+		StdDraw.filledCircle(this.getX(), this.getY(), this.getRadius());
 	}
 
 	/**

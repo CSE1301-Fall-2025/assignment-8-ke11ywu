@@ -5,7 +5,7 @@ import support.cse131.NotYetImplementedException;
 
 public class Nonzombie extends Entity {
 
-	public static final double NONZOMBIE_SPEED = 0.01;
+	public static final double NONZOMBIE_SPEED = 0.055;
 
 	/**
 	 * 
@@ -30,8 +30,8 @@ public class Nonzombie extends Entity {
 	 * Draw a Nonzombie
 	 */
 	public void draw() {
-		StdDraw.setPenColor(255, 207, 210);
-		StdDraw.point(this.getX(), this.getY());
+		StdDraw.setPenColor(200, 0, 0);
+		StdDraw.filledCircle(this.getX(), this.getY(), this.getRadius());
 	}
 
 	/**
@@ -46,20 +46,19 @@ public class Nonzombie extends Entity {
 		for (Entity e : entities) {
 			if (e.isZombie() == true) {
 				hasZombies = true;
-				break;
+				if (this.isTouching(findClosestZombie(entities))) {
+					if (Math.random() < 0.8) {
+						return this.convert();
+					} else {
+						findClosestZombie(entities).consumeNonzombie();
+						this.wasConsumed();
+					}
+				}
 			}
 		}
 		if (hasZombies == true) {
 			this.moveAwayFrom(findClosestZombie(entities));
 			this.checkBounds();
-		}
-		if (this.isTouching(findClosestZombie(entities))){
-			if (Math.random() < 0.8){
-				return this.convert();
-			} else {
-				findClosestZombie(entities).consumeNonzombie();
-				this.wasConsumed();
-			}
 		}
 		return this;
 	}
