@@ -91,10 +91,9 @@ public class ZombieSimulator {
 		// NOTE: feel free to edit this code to support additional features
 		for (Entity entity : getEntities()) {
 			entity.draw();
-			StdDraw.setPenColor(0, 0, 0);
-			StdDraw.text(0.92, 0.92, this.getZombieCount() + "/" + this.entities.length);
 		}
-
+		StdDraw.setPenColor(0, 0, 0);
+		StdDraw.text(0.92, 0.92, this.getZombieCount() + "/" + this.entities.length);
 		StdDraw.show(); // commit deferred drawing as a result of enabling double buffering
 	}
 
@@ -136,7 +135,7 @@ public class ZombieSimulator {
 			zombieSimulator.update();
 			zombieSimulator.draw();
 
-			StdDraw.pause(20);
+			StdDraw.pause(10);
 
 		}
 	}

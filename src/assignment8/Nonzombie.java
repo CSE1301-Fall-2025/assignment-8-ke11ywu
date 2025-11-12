@@ -5,7 +5,7 @@ import support.cse131.NotYetImplementedException;
 
 public class Nonzombie extends Entity {
 
-	public static final double NONZOMBIE_SPEED = 0.055;
+	public static final double NONZOMBIE_SPEED = 0.095;
 
 	/**
 	 * 

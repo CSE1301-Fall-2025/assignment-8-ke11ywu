@@ -18,7 +18,7 @@ public class Entity {
 		this.speed = 0;
 		isZombie = false;
 		isAlive = true;
-		this.radius = 0.008;
+		this.radius = 0.01;
 	}
 	
 	/**
@@ -249,17 +249,17 @@ public class Entity {
 	 * If the entity has moved out of bounds, returns it inbounds
 	 */
 	public void checkBounds() {
-		if (this.y < 0){
-			this.y = 0;
+		if (this.y < 0.01){
+			this.y = 0.01;
 		}
-		if (this.y > 1){
-			this.y = 1;
+		if (this.y > 0.99){
+			this.y = 0.99;
 		}
-		if (this.x < 0){
-			this.x = 0;
+		if (this.x < 0.01){
+			this.x = 0.01;
 		}
-		if (this.x > 1){
-			this.x = 1;
+		if (this.x > 0.99){
+			this.x = 0.99;
 		}
 	}
 	

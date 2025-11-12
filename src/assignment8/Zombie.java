@@ -5,7 +5,7 @@ import support.cse131.NotYetImplementedException;
 
 public class Zombie extends Entity {
 
-	public static final double ZOMBIE_SPEED = 0.051;
+	public static final double ZOMBIE_SPEED = 0.091;
 
 	/**
 	 * Create a new Zombie object
