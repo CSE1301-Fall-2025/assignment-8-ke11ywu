@@ -9,38 +9,52 @@ public class Zombie extends Entity {
 
 	/**
 	 * Create a new Zombie object
+	 * 
 	 * @param x coordinate
 	 * @param y coordinate
 	 */
-	public Zombie(double x, double y){
-		// FIXME
-		throw new NotYetImplementedException();
+	public Zombie(double x, double y) {
+		super(x, y, true, ZOMBIE_SPEED);
 	}
 
 	/**
 	 * Grow the Zombie after consuming a Nonzombie
 	 */
-	public void consumeNonzombie(){
-		// FIXME
-		throw new NotYetImplementedException();
+	public void consumeNonzombie() {
+		if (this.getRadius() < 0.02) {
+			this.setRadius(this.getRadius() * 1.20);
+		} else {
+			this.setRadius(0.02);
+		}
 	}
 
 	/**
 	 * Draw the Zombie
 	 */
 	public void draw() {
-		// FIXME
-		throw new NotYetImplementedException();
+		StdDraw.setPenColor(0, 90, 0);
+		StdDraw.point(this.getX(), this.getY());
 	}
-
 
 	/**
 	 * Update the Zombie
-	 * @param entities the array of Entity objects in the simulation, consumed or not
+	 * 
+	 * @param entities the array of Entity objects in the simulation, consumed or
+	 *                 not
 	 * @return the new Entity object to take the place of the current one
 	 */
 	public Entity update(Entity[] entities) {
-		// FIXME
-		throw new NotYetImplementedException();
+		boolean hasNonzombies = false;
+		for (Entity e : entities) {
+			if (e.isAlive() == true && e.isZombie() == false) {
+				hasNonzombies = true;
+				break;
+			}
+		}
+		if (hasNonzombies == true) {
+			this.moveToward(findClosestNonzombie(entities));
+			this.checkBounds();
+		}
+		return this;
 	}
 }

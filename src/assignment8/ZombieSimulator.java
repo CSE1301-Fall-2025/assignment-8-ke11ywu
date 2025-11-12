@@ -15,52 +15,71 @@ import support.cse131.Timing;
  */
 public class ZombieSimulator {
 	private static final String ZOMBIE_TOKEN_VALUE = "Zombie";
-
+	private Entity[] entities;
 
 	/**
 	 * Constructs a ZombieSimulator with an empty array of Entities.
 	 */
 	public ZombieSimulator(int n) {
-		// FIXME
-		throw new NotYetImplementedException();
+		this.entities = new Entity[n];
 	}
 
 	/**
-	 * @return the current array of entities 
+	 * @return the current array of entities
 	 */
 	public Entity[] getEntities() {
-		// FIXME
-		throw new NotYetImplementedException();
+		return this.entities;
 	}
 
-	/** 
+	/**
 	 * Reads an entire zombie simulation file from a specified ArgsProcessor, adding
 	 * each Entity to the array of entities.
 	 *
-	 * Assume that N (the integer indicating how many entities are in the simulation) has already been read in
+	 * Assume that N (the integer indicating how many entities are in the
+	 * simulation) has already been read in
 	 * and passed into the constructor.
 	 *
 	 * @param in Scanner to read the complete zombie simulation file format.
 	 */
 	public void readEntities(Scanner in) {
-		// FIXME
-		throw new NotYetImplementedException();
+		for (int i = 0; i < entities.length; i++) {
+			boolean isZombie;
+			String state = in.next();
+			Entity newEnt;
+			if (state.equals("Zombie")) { // using == will check reference equality instead of value equality
+				isZombie = true;
+			} else {
+				isZombie = false;
+			}
+			double xPos = in.nextDouble();
+			double yPos = in.nextDouble();
+			if (isZombie = true){
+				newEnt = new Zombie(xPos, yPos);
+			} else {
+				newEnt = new Nonzombie(xPos, yPos);
+			}
+			entities[i] = newEnt;
+		}
 	}
 
 	/**
 	 * @return the number of zombies in entities.
 	 */
 	public int getZombieCount() {
-		// FIXME
-		throw new NotYetImplementedException();
+		int count = 0;
+		for (Entity e : entities) {
+			if (e.isZombie() == true) {
+				count++;
+			}
+		}
+		return count;
 	}
 
 	/**
 	 * @return the number of nonzombies in entities.
 	 */
 	public int getNonzombieCount() {
-		// FIXME
-		throw new NotYetImplementedException();
+		return this.entities.length - this.getZombieCount();
 	}
 
 	/**
@@ -72,6 +91,8 @@ public class ZombieSimulator {
 		// NOTE: feel free to edit this code to support additional features
 		for (Entity entity : getEntities()) {
 			entity.draw();
+			StdDraw.setPenColor(0, 0, 0);
+			StdDraw.text(0.92, 0.92, this.getNonzombieCount() + "/" + this.entities.length);
 		}
 
 		StdDraw.show(); // commit deferred drawing as a result of enabling double buffering
@@ -86,15 +107,18 @@ public class ZombieSimulator {
 	 * 
 	 */
 	public void update() {
-		// FIXME
-		throw new NotYetImplementedException();
+		Entity[] updatedEnts = new Entity[this.entities.length];
+		for (int i = 0; i < this.entities.length; i++) {
+			updatedEnts[i] = this.entities[i].update(this.entities);
+		}
+		this.entities = updatedEnts;
 	}
 
 	/**
 	 * Runs the zombie simulation.
 	 * 
 	 * @param args arguments from the command line
-	 * @throws FileNotFoundException 
+	 * @throws FileNotFoundException
 	 */
 	public static void main(String[] args) throws FileNotFoundException {
 		StdDraw.enableDoubleBuffering(); // reduce unpleasant drawing artifacts, speed things up
@@ -102,7 +126,7 @@ public class ZombieSimulator {
 		JFileChooser chooser = new JFileChooser("zombieSims");
 		chooser.showOpenDialog(null);
 		File f = new File(chooser.getSelectedFile().getPath());
-		Scanner in = new Scanner(f); //making Scanner with a File
+		Scanner in = new Scanner(f); // making Scanner with a File
 
 		ZombieSimulator zombieSimulator = new ZombieSimulator(in.nextInt());
 		zombieSimulator.readEntities(in);
